@@ -29,8 +29,8 @@
       const results = await findUserComments(username, searchQuery, maxPages )
       const formattedResults = results.map( i => {
         const formattedComment = i
+          .replaceAll(searchQuery || null, `<span class="match-string">${searchQuery}</span>`)
           .replaceAll('\n' , '<br/>')
-          .replaceAll(searchQuery, `<span class="match-string">${searchQuery}</span>`)
         return `<div class="comment">${ formattedComment }</div>`
       })
       DOM.resultsContainer.innerHTML = formattedResults.join('')
