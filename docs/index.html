@@ -28,7 +28,7 @@
       const searchQuery = DOM.maxPagesInput.value.trim()
       const maxPages = Number(DOM.maxPagesInput.value)
       const results = await findUserComments(username, searchQuery, maxPages )
-      resultsContainer.innerText = results.split('<br>')
+      DOM.resultsContainer.innerText = results.split('<br/>')
     })
   </script>
 </html>
