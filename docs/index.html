@@ -5,7 +5,8 @@
   <body>
     <h3>Search user comments</h3>
     <input type="text" id="usernameInput"/>
-    <input type="number" id="maxPagesInput"/>
+    <input type="text" id="searchQueryInput"/>
+    <input type="number" id="maxPagesInput" min="0" value="0"/>
     <input type="button" id="submitButton"/>
     <pre id="results"></pre>
   </body>
@@ -13,11 +14,17 @@
     const DOM = {
       submitButton : document.getElementById(button),
       usernameInput : document.getElementById(username),
-      maxPagesInput : document.getElementById(maxPagesInput)
+      maxPagesInput : document.getElementById(maxPagesInput),
+      searchQueryInput : document.getElementById(searchQueryInput)
     }
     
-    submitButton.addEventListener('click', ()=>{
-      console.log('click'
+    DOM.submitButton.addEventListener('click', async ()=>{
+      console.log('click')
+      const username = DOM.usernameInput.value
+      const searchQuery = DOM.maxPagesInput.value
+      const maxPages = DOM.searchQueryInput.value
+      const results = await findUserComments(DOM, searchQuery, maxPages ){
+      console.log( results )
     })
   </script>
 </html>
