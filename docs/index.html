@@ -4,9 +4,20 @@
   </head>
   <body>
     <h3>Search user comments</h3>
-    <input type="text" id="username"/>
-    <input type="number" id="maxPages"/>
-    <input type="button" id="submit"/>
+    <input type="text" id="usernameInput"/>
+    <input type="number" id="maxPagesInput"/>
+    <input type="button" id="submitButton"/>
     <pre id="results"></pre>
   </body>
+  <script>
+    const DOM = {
+      submitButton : document.getElementById(button),
+      usernameInput : document.getElementById(username),
+      maxPagesInput : document.getElementById(maxPagesInput)
+    }
+    
+    submitButton.addEventlistener('click', ()=>{
+      console.log('click'
+    })
+  </script>
 </html>
