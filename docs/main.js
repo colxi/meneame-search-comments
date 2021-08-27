@@ -32,13 +32,9 @@ async function getAllComments(username, maxPages =  0){
 }
 
 
-async function findInComments(username, str, maxPages ){
+async function findUserComments(username, str, maxPages ){
   const comments = await getAllComments(username, maxPages)
   return comments.filter(i=> i.includes(str))
 }
-
-console.clear()
-findInComments('admin', 'test' ,100).then( matches => console.log(matches) )
-
 
 
