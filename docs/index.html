@@ -22,8 +22,7 @@
       resultsContainer :  document.getElementById('resultsContainer')
     }
     
-    DOM.submitButton.addEventListener('click', async ()=>{
-      console.log('click')
+    const performSeach = async () => {
       const username = DOM.usernameInput.value.trim()
       const searchQuery = DOM.searchQueryInput.value.trim()
       const maxPages = Number(DOM.maxPagesInput.value)
@@ -35,7 +34,9 @@
         return `<div class="comment">${ formattedComment }</div>`
       })
       DOM.resultsContainer.innerHTML = formattedResults.join('')
-    })
+    }
+    
+    DOM.submitButton.addEventListener('click', performSeach )
   </script>
   <style>
     .comment{
