@@ -25,7 +25,7 @@ async function getAllComments(username, maxPages =  0){
     if(!results.length) break
     comments.push(...results)
     page++
-    if(maxPages && page >= maxPages) break
+    if(maxPages && page > maxPages) break
     await sleep(10)
   }
   return comments 
