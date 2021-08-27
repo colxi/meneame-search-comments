@@ -28,7 +28,8 @@
       const searchQuery = DOM.searchQueryInput.value.trim()
       const maxPages = Number(DOM.maxPagesInput.value)
       const results = await findUserComments(username, searchQuery, maxPages )
-      DOM.resultsContainer.innerText = results.join('\n')
+      const formattedResults = results.map(i => `<div class="comment">${i}</div>`)
+      DOM.resultsContainer.innerHTML = formattedResults.join()
     })
   </script>
 </html>
