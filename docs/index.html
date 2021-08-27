@@ -25,7 +25,7 @@
     DOM.submitButton.addEventListener('click', async ()=>{
       console.log('click')
       const username = DOM.usernameInput.value.trim()
-      const searchQuery = DOM.maxPagesInput.value.trim()
+      const searchQuery = DOM.searchQueryInput.value.trim()
       const maxPages = Number(DOM.maxPagesInput.value)
       const results = await findUserComments(username, searchQuery, maxPages )
       DOM.resultsContainer.innerText = results.join('<br/>')
