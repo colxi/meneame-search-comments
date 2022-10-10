@@ -1,3 +1,4 @@
+let DOM = {}
 const bodyExp = /<body>(?<body>[^]+?)<\/body>/gm
 const parser = new DOMParser()
 
@@ -35,3 +36,50 @@ async function findUserComments(username, str, maxPages) {
   const comments = await getAllComments(username, maxPages)
   return comments.filter((i) => i.includes(str))
 }
+
+async function performSearch() {
+  const username = DOM.usernameInput.value.trim()
+  const searchQuery = DOM.searchQueryInput.value.trim()
+  const maxPages = Number(DOM.maxPagesInput.value)
+
+  if (!username || !searchQuery || !searchQuery) {
+    alert('Por favor rellena todos los campos del formulario')
+    return
+  }
+
+  DOM.resultsContainer.innerHTML = ''
+  DOM.loader.removeAttribute('hidden', true)
+  let formattedResults
+  const results = await findUserComments(username, searchQuery, maxPages)
+  if (results.length) {
+    formattedResults = results.map((i) => {
+      const formattedComment = i
+        .replaceAll(
+          searchQuery || null,
+          `<span class="match-string">${searchQuery}</span>`
+        )
+        .replaceAll('\n', '<br/>')
+      return `<div class="comment">${formattedComment}</div>`
+    })
+  } else {
+    formattedResults = [
+      '<div class="no_results">No se han encontrado resultados</div>',
+    ]
+  }
+
+  DOM.loader.setAttribute('hidden', true)
+  DOM.resultsContainer.innerHTML = formattedResults.join('')
+}
+
+window.addEventListener('DOMContentLoaded', (event) => {
+  console.log('aa')
+  DOM = {
+    submitButton: document.getElementById('submitButton'),
+    usernameInput: document.getElementById('usernameInput'),
+    maxPagesInput: document.getElementById('maxPagesInput'),
+    searchQueryInput: document.getElementById('searchQueryInput'),
+    resultsContainer: document.getElementById('resultsContainer'),
+    loader: document.getElementById('loader'),
+  }
+  DOM.submitButton.addEventListener('click', performSearch)
+})
