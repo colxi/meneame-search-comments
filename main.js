@@ -96,7 +96,7 @@ window.addEventListener('DOMContentLoaded', async (event) => {
   DOM.submitButton.addEventListener('click', performSearch)
 
   if (!(await doesSupportCORS())) {
-    console.log('No CORS Supported"')
+    console.log('CORS are not supported')
     disclaimer.removeAttribute('hidden')
     form.setAttribute('disabled', 'true')
   }
