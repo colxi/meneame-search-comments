@@ -6,6 +6,16 @@ async function sleep(timeInMillis = 1000) {
   return new Promise((resolve) => setTimeout(resolve, timeInMillis))
 }
 
+async function doesSupportCORS() {
+  const url = `https://old.meneame.net`
+  try {
+    await fetch(url)
+    return true
+  } catch (e) {
+    return false
+  }
+}
+
 async function getPageComments(username, page) {
   const url = `https://old.meneame.net/user/${username}/commented?page=${page}`
   const response = await fetch(url)
@@ -71,8 +81,7 @@ async function performSearch() {
   DOM.resultsContainer.innerHTML = formattedResults.join('')
 }
 
-window.addEventListener('DOMContentLoaded', (event) => {
-  console.log('aa')
+window.addEventListener('DOMContentLoaded', async (event) => {
   DOM = {
     submitButton: document.getElementById('submitButton'),
     usernameInput: document.getElementById('usernameInput'),
@@ -80,6 +89,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
     searchQueryInput: document.getElementById('searchQueryInput'),
     resultsContainer: document.getElementById('resultsContainer'),
     loader: document.getElementById('loader'),
+    disclaimer: document.getElementById('disclaimer'),
+    form: document.getElementById('form'),
   }
+
   DOM.submitButton.addEventListener('click', performSearch)
+
+  if (!(await doesSupportCORS())) {
+    console.log('No CORS Supported"')
+    disclaimer.removeAttribute('hidden')
+    form.setAttribute('disabled', 'true')
+  }
 })
