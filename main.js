@@ -50,12 +50,12 @@ async function findUserComments(username, str, maxPages) {
 async function performSearch() {
   const username = DOM.usernameInput.value.trim()
   const searchQuery = DOM.searchQueryInput.value.trim()
-  const maxPages = Number(DOM.maxPagesInput.value)
-
+  const maxComments = Number(DOM.maxPagesInput.value)
   if (!username || !searchQuery || !searchQuery) {
     alert('Por favor rellena todos los campos del formulario')
     return
   }
+  const maxPages = Math.ceil(maxComments / 25)
 
   DOM.resultsContainer.innerHTML = ''
   DOM.loader.removeAttribute('hidden', true)
